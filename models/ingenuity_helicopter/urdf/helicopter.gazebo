@@ -1,15 +1,28 @@
 <?xml version="1.0"?>
 <robot>
 
+  <!-- <ros2_control name="IgnitionSystem" type="system">
+    <hardware>
+      <plugin>ign_ros2_control/IgnitionSystem</plugin>
+    </hardware>
+
+    <joint name="base_link">
+      <command_interface name="velocity" />
+      <state_interface name="position" />
+    </joint>
+  </ros2_control> -->
+
   <!-- ros_control plugin -->
   <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/helicopter</robotNamespace>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    </plugin>
+
+    <!-- <plugin filename="libign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <parameters>$(find mars_rover)/inginuity/mars_rover_control.yaml</parameters>
+    </plugin> -->
 
     <gazebo reference="base_link"></gazebo>
     <gazebo reference="helicopter_body"></gazebo>
-    
+    <gazebo reference="propellor_1"></gazebo>
+    <gazebo reference="propellor_2"></gazebo>
+
   </gazebo>
 </robot>

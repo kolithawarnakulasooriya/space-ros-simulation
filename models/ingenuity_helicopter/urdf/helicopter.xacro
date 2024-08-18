@@ -5,7 +5,7 @@
 
     <link name="base_link"></link>
     <link name="helicopter_body">
-        <collision>
+       <collision>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <geometry>
                 <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/body.dae"
@@ -21,11 +21,65 @@
         </visual>
         <inertial>
             <origin xyz="0 0 0"
-                rpy="0 0 0" />
+                 rpy="0 0 0" />
             <mass value="1.8" />
             <inertia ixx="2.56" ixy="0" ixz="0" iyy="2.56" iyz="0" izz="2.56"/>
         </inertial>
     </link>
+    <link name="propellor_1">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+            <geometry>
+                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor_1.dae"
+                    scale="1 1 1" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+            <geometry>
+                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor_1.dae"
+                    scale="1 1 1" />
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0 0 0"
+                 rpy="0 0 0" />
+            <mass value="1.8" />
+            <inertia ixx="0.42" ixy="0" ixz="0" iyy="0.42" iyz="0" izz="0.42"/>
+        </inertial>
+    </link>
+    <link name="propellor_2">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+            <geometry>
+                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor-2.dae"
+                    scale="1 1 1" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+            <geometry>
+                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor-2.dae"
+                    scale="1 1 1" />
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0 0 0"
+                 rpy="0 0 0" />
+            <mass value="1.8" />
+            <inertia ixx="0.42" ixy="0" ixz="0" iyy="0.42" iyz="0" izz="0.42"/>
+        </inertial>
+    </link>
+    <joint name="helicopter_body_propellor_1" type="fixed">
+        <parent link="helicopter_body"/>
+        <child link="propellor_1"/>
+        <origin rpy="0 0 0" xyz="-0.345 -0.435 0.4"/>
+    </joint>
+    <joint name="helicopter_body_propellor_2" type="fixed">
+        <parent link="helicopter_body"/>
+        <child link="propellor_2"/>
+        <origin rpy="0 0 0" xyz="0.9 0.35 1.03"/>
+    </joint>
     <joint name="base_link_helicopter_body" type="fixed">
         <parent link="base_link"/>
         <child link="helicopter_body"/>
