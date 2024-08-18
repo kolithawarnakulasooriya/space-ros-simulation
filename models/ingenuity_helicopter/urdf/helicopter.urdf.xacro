@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="helicopter">
+
+    <!-- Import SSRMS_Canadarm2 urdf file -->
+    <xacro:include filename="$(find simulation)/models/ingenuity_helicopter/urdf/helicopter.xacro" />
+
+</robot>

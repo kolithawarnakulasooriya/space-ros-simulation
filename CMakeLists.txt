@@ -3,6 +3,7 @@ project(simulation)
 find_package(ament_cmake REQUIRED)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/models/curiosity_path)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/models/ingenuity_helicopter)
 
 install(DIRECTORY
   models

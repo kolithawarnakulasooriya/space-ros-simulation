@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sdf version='1.9'>
+<sdf version='1.7'>
   <model name="curiosity_path">
       <static>1</static>
       <link name="link">

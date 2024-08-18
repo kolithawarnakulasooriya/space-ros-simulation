@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot name="helicopter" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find simulation)/models/ingenuity_helicopter/urdf/helicopter.gazebo" />
+
+    <link name="base_link"></link>
+    <link name="helicopter_body">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+            <geometry>
+                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/body.dae"
+                    scale="1 1 1" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"></origin>
+            <geometry>
+                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/body.dae"
+                    scale="1 1 1" />
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0 0 0"
+                rpy="0 0 0" />
+            <mass value="1.8" />
+            <inertia ixx="2.56" ixy="0" ixz="0" iyy="2.56" iyz="0" izz="2.56"/>
+        </inertial>
+    </link>
+    <joint name="base_link_helicopter_body" type="fixed">
+        <parent link="base_link"/>
+        <child link="helicopter_body"/>
+    </joint>
+</robot>
