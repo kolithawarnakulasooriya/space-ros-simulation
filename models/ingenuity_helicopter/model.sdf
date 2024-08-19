@@ -45,14 +45,6 @@
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
-        <!--
-        <material>
-          <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            <name>Gazebo/Grey</name>
-          </script>
-        </material>
-        -->
       </visual>
       <velocity_decay>
         <linear>0.000000</linear>
@@ -60,7 +52,34 @@
       </velocity_decay>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
-      <gravity>1</gravity>        
-    </link> 
+      <gravity>1</gravity>
+    </link>
+    <link name="link_pad">
+      <static>1</static>
+      <pose>0 0 -8.8 0 0 0</pose>
+      <collision name="collision_pad">
+        <geometry>
+          <box>
+            <size>2 2 0.4</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual_pad">
+        <origin xyz="0 0 0" rpy="0 0 0"></origin>
+        <geometry>
+         <box>
+            <size>2 2 0.3</size>
+          </box>
+        </geometry>  
+      </visual>
+    </link>
   </model>
 </sdf>
