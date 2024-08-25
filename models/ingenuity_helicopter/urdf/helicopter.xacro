@@ -5,7 +5,7 @@
 
     <link name="base_link"></link>
     <link name="helicopter_body">
-       <collision>
+        <collision>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <geometry>
                 <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/body.dae"
@@ -21,67 +21,96 @@
         </visual>
         <inertial>
             <origin xyz="0 0 0"
-                 rpy="0 0 0" />
+                rpy="0 0 0" />
             <mass value="1.8" />
-            <inertia ixx="2.56" ixy="0" ixz="0" iyy="2.56" iyz="0" izz="2.56"/>
+            <inertia ixx="2.56" ixy="0" ixz="0" iyy="2.56" iyz="0" izz="2.56" />
         </inertial>
     </link>
-    <link name="propellor_1">
+    <link name="propellor_up">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <geometry>
-                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor_1.dae"
+                <mesh
+                    filename="package://simulation/models/ingenuity_helicopter/meshes/rotor_up.dae"
                     scale="1 1 1" />
             </geometry>
         </collision>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <geometry>
-                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor_1.dae"
+                <mesh
+                    filename="package://simulation/models/ingenuity_helicopter/meshes/rotor_up.dae"
                     scale="1 1 1" />
             </geometry>
         </visual>
         <inertial>
             <origin xyz="0 0 0"
-                 rpy="0 0 0" />
+                rpy="0 0 0" />
             <mass value="1.8" />
-            <inertia ixx="0.42" ixy="0" ixz="0" iyy="0.42" iyz="0" izz="0.42"/>
+            <inertia ixx="0.42" ixy="0" ixz="0" iyy="0.42" iyz="0" izz="0.42" />
         </inertial>
     </link>
-    <link name="propellor_2">
+    <link name="propellor_down">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <geometry>
-                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor-2.dae"
+                <mesh
+                    filename="package://simulation/models/ingenuity_helicopter/meshes/rotor_down.dae"
                     scale="1 1 1" />
             </geometry>
         </collision>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
             <geometry>
-                <mesh filename="package://simulation/models/ingenuity_helicopter/meshes/propellor-2.dae"
+                <mesh
+                    filename="package://simulation/models/ingenuity_helicopter/meshes/rotor_down.dae"
                     scale="1 1 1" />
             </geometry>
         </visual>
         <inertial>
             <origin xyz="0 0 0"
-                 rpy="0 0 0" />
+                rpy="0 0 0" />
             <mass value="1.8" />
-            <inertia ixx="0.42" ixy="0" ixz="0" iyy="0.42" iyz="0" izz="0.42"/>
+            <inertia ixx="0.42" ixy="0" ixz="0" iyy="0.42" iyz="0" izz="0.42" />
         </inertial>
     </link>
-    <joint name="helicopter_body_propellor_1" type="fixed">
-        <parent link="helicopter_body"/>
-        <child link="propellor_1"/>
-        <origin rpy="0 0 0" xyz="-0.345 -0.435 0.4"/>
+    <joint name="body_propellor_up_joint" type="continuous">
+        <parent link="helicopter_body" />
+        <child link="propellor_up" />
+        <origin rpy="0 0 0" xyz="0 0 0.46" /> <!-- xyz="-0.345 -0.435 0.40"-->
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.0" friction="0.0" />
     </joint>
-    <joint name="helicopter_body_propellor_2" type="fixed">
-        <parent link="helicopter_body"/>
-        <child link="propellor_2"/>
-        <origin rpy="0 0 0" xyz="0.9 0.35 1.03"/>
+    <joint name="body_propellor_down_joint" type="continuous">
+        <parent link="helicopter_body" />
+        <child link="propellor_down" />
+        <origin rpy="0 0 0" xyz="0 0 0.35" />
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.0" friction="0.0" />
     </joint>
     <joint name="base_link_helicopter_body" type="fixed">
         <parent link="base_link"/>
         <child link="helicopter_body"/>
     </joint>
+
+    <transmission name="helicopter_body_propellor_up_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="body_propellor_up_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="propellor_up_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="helicopter_body_propellor_down_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="body_propellor_down_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="propellor_down_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
 </robot>
