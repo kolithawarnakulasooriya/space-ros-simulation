@@ -14,6 +14,10 @@
       <command_interface name="velocity" />
       <state_interface name="position" />
     </joint>
+    <joint name="base_link_body_joint">
+      <command_interface name="velocity" />
+      <state_interface name="position" />
+    </joint>
   </ros2_control>
 
 
@@ -31,8 +35,41 @@
       <background_color>0.9 0.753 0.66 1</background_color>
     </plugin>
 
-    <plugin filename="libignition-gazebo-imu-system.so"
-      name="ignition::gazebo::systems::Imu">
+    <plugin filename="ignition-gazebo-lift-drag-system"
+      name="ignition::gazebo::systems::LiftDrag">
+      <alpha>0.1</alpha>
+			<CLa>0.1</CLa>
+			<cda>0.01</cda>
+			<cma>0.0</cma>
+			<alphaStall>0.2</alphaStall>
+			<cla_stall>-0.2</cla_stall>
+			<cda_stall>1.0</cda_stall>
+			<cma_stall>0.0</cma_stall>
+			<cp>0 0.5 0</cp>
+			<area>0.762</area>
+			<air_density>1.2041</air_density>
+			<forward>0 0 0</forward>
+			<upward>0 0 1</upward>
+			<link_name>propellor_down</link_name>
+			<control_joint>body_propellor_down_joint</control_joint>
+    </plugin>
+    <plugin filename="ignition-gazebo-lift-drag-system"
+      name="ignition::gazebo::systems::LiftDrag">
+      <alpha>0.1</alpha>
+			<CLa>0.1</CLa>
+			<cda>0.01</cda>
+			<cma>0.0</cma>
+			<alphaStall>0.2</alphaStall>
+			<cla_stall>-0.2</cla_stall>
+			<cda_stall>1.0</cda_stall>
+			<cma_stall>0.0</cma_stall>
+			<cp>0 0.5 0</cp>
+			<area>0.762</area>
+			<air_density>1.2041</air_density>
+			<forward>0 0 0</forward>
+			<upward>0 0 -1</upward>
+			<link_name>propellor_up</link_name>
+			<control_joint>body_propellor_up_joint</control_joint>
     </plugin>
   </gazebo>
 

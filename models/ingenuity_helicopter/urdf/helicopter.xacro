@@ -2,8 +2,20 @@
 <robot name="helicopter" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:include filename="$(find simulation)/models/ingenuity_helicopter/urdf/helicopter.gazebo" />
-
-    <link name="base_link"></link>
+    <link name="base_link_footprint">
+    </link>
+    <link name="base_link">
+        <inertial>
+            <origin xyz="0 0 0"
+                rpy="0 0 0" />
+            <mass value="1.8" />
+            <inertia ixx="1.66" ixy="0" ixz="0" iyy="1.66" iyz="0" izz="2.56" />
+        </inertial>
+    </link>
+    <joint name="base_footprint_base_link_joint" type="fixed">
+        <parent link="base_link_footprint"/>
+        <child link="base_link"/>
+    </joint>
     <link name="helicopter_body">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"></origin>
@@ -88,9 +100,11 @@
         <axis xyz="0 0 1" />
         <dynamics damping="0.0" friction="0.0" />
     </joint>
-    <joint name="base_link_helicopter_body" type="fixed">
+    <joint name="base_link_body_joint" type="continuous">
         <parent link="base_link"/>
         <child link="helicopter_body"/>
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <axis xyz="0 0 1" />
     </joint>
 
     <transmission name="helicopter_body_propellor_up_trans">
